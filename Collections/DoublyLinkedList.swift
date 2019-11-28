@@ -235,7 +235,7 @@ extension LinkedList : MutableCollection {
     public subscript(bounds: Range<Index>) -> SubSequence {
         get {
             checkValidRange(bounds)
-            return MutableRangeReplaceableBidirectionalSlice(base: self, bounds: bounds)
+            return Slice(base: self, bounds: bounds)
         }
         set(slice) {
             replaceSubrange(bounds, with: slice)

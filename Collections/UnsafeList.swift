@@ -130,7 +130,7 @@ struct UnsafeChain<Element> {
         // Clone first node and initialize the chain.
         let first = UnsafeNode.make(head.element)
         var clone = UnsafeChain(head: first, tail: first)
-        if let index = nodes.index(of: head) {
+        if let index = nodes.firstIndex(of: head) {
             nodes[index] = first
         }
 
@@ -143,7 +143,7 @@ struct UnsafeChain<Element> {
             copy.previous = clone.tail
             clone.tail.next = copy
             clone.tail = copy
-            if let index = nodes.index(of: node) {
+            if let index = nodes.firstIndex(of: node) {
                 nodes[index] = copy
             }
 

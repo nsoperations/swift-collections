@@ -200,7 +200,7 @@ extension SinglyLinkedList : MutableCollection {
     public subscript(bounds: Range<Index>) -> SubSequence {
         get {
             checkValidRange(bounds)
-            return MutableRangeReplaceableSlice(base: self, bounds: bounds)
+            return Slice(base: self, bounds: bounds)
         }
         set(slice) {
             replaceSubrange(bounds, with: slice)
