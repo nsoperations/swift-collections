@@ -9,7 +9,7 @@
 import XCTest
 @testable import Collections
 
-class SinglyLinkedListTests: XCTestCase {
+class SingleLinkedListTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -22,7 +22,7 @@ class SinglyLinkedListTests: XCTestCase {
     }
 
     func testEmptyList() {
-        let list = SinglyLinkedList<Int>()
+        let list = SingleLinkedList<Int>()
 
         XCTAssertEqual(list.count, 0, "The list count is not equal to zero")
         XCTAssertEqual(list.distance(from: list.startIndex, to: list.endIndex), 0, "Total distance is not equal to zero")
@@ -31,7 +31,7 @@ class SinglyLinkedListTests: XCTestCase {
     }
 
     func testElementSubscript() {
-        var list = SinglyLinkedList([-3, -2, -1])
+        var list = SingleLinkedList([-3, -2, -1])
 
         var index = list.startIndex
         list[index] = 1
@@ -52,7 +52,7 @@ class SinglyLinkedListTests: XCTestCase {
     }
 
     func testSliceSubscript() {
-        let list = SinglyLinkedList([-3, -2, -1, 0, 0, 0, 1, 2, 3])
+        let list = SingleLinkedList([-3, -2, -1, 0, 0, 0, 1, 2, 3])
         let slice1 = list[list.startIndex..<list.index(list.startIndex, offsetBy: 3)]
         let slice2 = list[slice1.endIndex..<list.index(slice1.endIndex, offsetBy: 3)]
         let slice3 = list[slice2.endIndex..<list.endIndex]
@@ -63,14 +63,14 @@ class SinglyLinkedListTests: XCTestCase {
     }
 
     func testSwapAt() {
-        var list = SinglyLinkedList([3, 2, 1])
+        var list = SingleLinkedList([3, 2, 1])
         list.swapAt(list.startIndex, list.index(list.startIndex, offsetBy: 2))
 
         XCTAssertEqual(Array(list), [1, 2, 3], "The elements are not swapped")
     }
 
     func testNodes() {
-        let list = SinglyLinkedList([1, 2, 3])
+        let list = SingleLinkedList([1, 2, 3])
         let nodes = Array(list.nodes)
         let values = [
             nodes[0].element,
@@ -85,7 +85,7 @@ class SinglyLinkedListTests: XCTestCase {
     }
 
     func testAppendElement() {
-        var list = SinglyLinkedList<Int>()
+        var list = SingleLinkedList<Int>()
         list.append(1)
         list.append(2)
         list.append(3)
@@ -94,7 +94,7 @@ class SinglyLinkedListTests: XCTestCase {
     }
 
     func testInsertElement() {
-        var list = SinglyLinkedList<Int>()
+        var list = SingleLinkedList<Int>()
         list.insert(3, at: list.endIndex)
         list.insert(1, at: list.startIndex)
         list.insert(2, at: list.index(list.startIndex, offsetBy: 1))
@@ -103,7 +103,7 @@ class SinglyLinkedListTests: XCTestCase {
     }
 
     func testAppendSequence() {
-        var list = SinglyLinkedList<Int>()
+        var list = SingleLinkedList<Int>()
         list.append(contentsOf: [1, 2])
         list.append(contentsOf: [    ])
         list.append(contentsOf: [3   ])
@@ -112,7 +112,7 @@ class SinglyLinkedListTests: XCTestCase {
     }
 
     func testInsertSequence() {
-        var list = SinglyLinkedList<Int>()
+        var list = SingleLinkedList<Int>()
         list.insert(contentsOf: [3], at: list.endIndex)
         list.insert(contentsOf: [ ], at: list.startIndex)
         list.insert(contentsOf: [1], at: list.startIndex)
@@ -122,7 +122,7 @@ class SinglyLinkedListTests: XCTestCase {
     }
 
     func testRemoveFirst() {
-        var list = SinglyLinkedList([-3, -2, -1, 1, 2, 3])
+        var list = SingleLinkedList([-3, -2, -1, 1, 2, 3])
         let removed = [
             list.removeFirst(),
             list.removeFirst(),
@@ -134,7 +134,7 @@ class SinglyLinkedListTests: XCTestCase {
     }
 
     func testRemoveAt() {
-        var list = SinglyLinkedList([-3, 1, 2, -2, 3, -1])
+        var list = SingleLinkedList([-3, 1, 2, -2, 3, -1])
         let removed = [
             list.remove(at: list.startIndex),
             list.remove(at: list.index(list.startIndex, offsetBy: 2)),
@@ -146,7 +146,7 @@ class SinglyLinkedListTests: XCTestCase {
     }
 
     func testRemoveSubrange() {
-        var list = SinglyLinkedList([-4, 1, 2, -3, -2, 3, -1])
+        var list = SingleLinkedList([-4, 1, 2, -3, -2, 3, -1])
         list.removeSubrange(list.startIndex..<list.index(after: list.startIndex))
         list.removeSubrange(list.index(list.startIndex, offsetBy: 2)..<list.index(list.startIndex, offsetBy: 4))
         list.removeSubrange(list.index(list.startIndex, offsetBy: 3)..<list.endIndex)
@@ -155,14 +155,14 @@ class SinglyLinkedListTests: XCTestCase {
     }
 
     func testRemoveAll() {
-        var list = SinglyLinkedList([-1, -2, -3])
+        var list = SingleLinkedList([-1, -2, -3])
         list.removeAll()
 
         XCTAssertEqual(Array(list), [], "The list is not empty")
     }
 
     func testReplaceSubrangeSlices() {
-        var list = SinglyLinkedList([-4, 2, -3, -2, 3, -1])
+        var list = SingleLinkedList([-4, 2, -3, -2, 3, -1])
         list.replaceSubrange(list.startIndex..<list.index(list.startIndex, offsetBy: 3), with:[1])
         list.replaceSubrange(list.index(list.startIndex, offsetBy: 1)..<list.index(list.startIndex, offsetBy: 4), with:[])
         list.replaceSubrange(list.endIndex..<list.endIndex, with: [2, 3])
@@ -171,14 +171,14 @@ class SinglyLinkedListTests: XCTestCase {
     }
 
     func testReplaceSubrangeEmpty() {
-        var list = SinglyLinkedList([1, 2, 3])
+        var list = SingleLinkedList([1, 2, 3])
         list.replaceSubrange(list.startIndex..<list.endIndex, with: [])
 
         XCTAssertEqual(Array(list), [], "The list is not empty")
     }
 
     func testCopyOnWriteEmpty() {
-        let list = SinglyLinkedList<Int>()
+        let list = SingleLinkedList<Int>()
 
         var copy = list
         copy.append(contentsOf: [1, 2, 3])
@@ -188,7 +188,7 @@ class SinglyLinkedListTests: XCTestCase {
     }
 
     func testCopyOnWriteComplete() {
-        let list = SinglyLinkedList([1, 2, 3])
+        let list = SingleLinkedList([1, 2, 3])
 
         var copy = list
         copy.removeSubrange(copy.startIndex..<copy.endIndex)
@@ -198,7 +198,7 @@ class SinglyLinkedListTests: XCTestCase {
     }
 
     func testCopyOnWriteIndex() {
-        let list = SinglyLinkedList([1, 2, 3])
+        let list = SingleLinkedList([1, 2, 3])
         let index = list.index(after: list.startIndex)
 
         var copy = list
@@ -209,7 +209,7 @@ class SinglyLinkedListTests: XCTestCase {
     }
 
     func testCopyOnWriteSwap() {
-        let list = SinglyLinkedList([1, 2, 3])
+        let list = SingleLinkedList([1, 2, 3])
 
         var copy = list
         copy.swapAt(list.startIndex, list.index(list.startIndex, offsetBy:2))
@@ -219,7 +219,7 @@ class SinglyLinkedListTests: XCTestCase {
     }
 
     func testCopyOnWriteRange() {
-        let list = SinglyLinkedList([-3, -2, -1, 1, 2, 3])
+        let list = SingleLinkedList([-3, -2, -1, 1, 2, 3])
         let range = list.index(after: list.startIndex)..<list.index(list.startIndex, offsetBy: 5)
 
         var copy = list

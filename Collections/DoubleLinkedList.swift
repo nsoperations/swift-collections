@@ -1,5 +1,5 @@
 //
-//  DoublyLinkedList.swift
+//  DoubleLinkedList.swift
 //  Collections
 //
 //  Created by Muhammad Tayyab Akram on 13/03/2018.

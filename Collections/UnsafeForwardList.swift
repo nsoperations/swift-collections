@@ -8,7 +8,7 @@
 
 import Foundation
 
-public final class SinglyLinkedListNode<Element> {
+public final class SingleLinkedListNode<Element> {
     var optionalElement: Element!
     var unsafeNext: UnsafeForwardNode<Element>?
 
@@ -20,13 +20,13 @@ public final class SinglyLinkedListNode<Element> {
         return optionalElement!
     }
 
-    public var next: SinglyLinkedListNode<Element>? {
+    public var next: SingleLinkedListNode<Element>? {
         return unsafeNext?.instance
     }
 }
 
 struct UnsafeForwardNode<Element> : Equatable {
-    unowned(unsafe) let instance: SinglyLinkedListNode<Element>
+    unowned(unsafe) let instance: SingleLinkedListNode<Element>
 
     @inline(__always)
     static func ==(lhs: UnsafeForwardNode<Element>, rhs: UnsafeForwardNode<Element>) -> Bool {
@@ -35,12 +35,12 @@ struct UnsafeForwardNode<Element> : Equatable {
 
     @inline(__always)
     static func make(_ element: Element! = nil) -> UnsafeForwardNode<Element> {
-        let instance = SinglyLinkedListNode<Element>(element)
+        let instance = SingleLinkedListNode<Element>(element)
         return UnsafeForwardNode(instance).retain()
     }
 
     @inline(__always)
-    private init(_ instance: SinglyLinkedListNode<Element>) {
+    private init(_ instance: SingleLinkedListNode<Element>) {
         self.instance = instance
     }
 
@@ -108,7 +108,7 @@ struct UnsafeForwardChain<Element> {
         // Clone first node and initialize the chain.
         let first = UnsafeForwardNode.make(head.element)
         var clone = UnsafeForwardChain(head: first, tail: first)
-        if let index = nodes.index(of: head) {
+        if let index = nodes.firstIndex(of: head) {
             nodes[index] = first
         }
 
@@ -120,7 +120,7 @@ struct UnsafeForwardChain<Element> {
             let copy = UnsafeForwardNode.make(node!.element)
             clone.tail.next = copy
             clone.tail = copy
-            if let index = nodes.index(of: node!) {
+            if let index = nodes.firstIndex(of: node!) {
                 nodes[index] = copy
             }
 

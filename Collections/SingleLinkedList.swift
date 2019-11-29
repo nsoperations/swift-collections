@@ -1,5 +1,5 @@
 //
-//  SinglyLinkedList.swift
+//  SingleLinkedList.swift
 //  Collections
 //
 //  Created by Muhammad Tayyab Akram on 05/03/2018.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct SinglyLinkedListIterator<Element> : IteratorProtocol {
+public struct SingleLinkedListIterator<Element> : IteratorProtocol {
     private let owner: UnsafeForwardList<Element>
     private var node: UnsafeForwardNode<Element>!
     private let last: UnsafeForwardNode<Element>!
@@ -33,21 +33,21 @@ public struct SinglyLinkedListIterator<Element> : IteratorProtocol {
     }
 }
 
-public struct SinglyLinkedListIndex<Element> : Comparable {
+public struct SingleLinkedListIndex<Element> : Comparable {
     unowned(unsafe) var owner: UnsafeForwardList<Element>
     var tag: Int
     var previous: UnsafeForwardNode<Element>
 
-    public static func ==(lhs: SinglyLinkedListIndex, rhs: SinglyLinkedListIndex) -> Bool {
+    public static func ==(lhs: SingleLinkedListIndex, rhs: SingleLinkedListIndex) -> Bool {
         return lhs.previous == rhs.previous
     }
 
-    public static func <(lhs: SinglyLinkedListIndex, rhs: SinglyLinkedListIndex) -> Bool {
+    public static func <(lhs: SingleLinkedListIndex, rhs: SingleLinkedListIndex) -> Bool {
         return lhs.tag < rhs.tag
     }
 }
 
-public struct SinglyLinkedList<Element> {
+public struct SingleLinkedList<Element> {
     private var unsafe: UnsafeForwardList<Element>
 
     public init() {
@@ -112,11 +112,11 @@ public struct SinglyLinkedList<Element> {
 
 // MARK: - Sequence
 
-extension SinglyLinkedList : Sequence {
-    public typealias Iterator = SinglyLinkedListIterator<Element>
+extension SingleLinkedList : Sequence {
+    public typealias Iterator = SingleLinkedListIterator<Element>
 
     public func makeIterator() -> Iterator {
-        return SinglyLinkedListIterator(owner: unsafe,
+        return SingleLinkedListIterator(owner: unsafe,
                                         first: unsafe.head.next,
                                         last: unsafe.tail.next)
     }
@@ -124,9 +124,9 @@ extension SinglyLinkedList : Sequence {
 
 // MARK: - LinkedCollection
 
-extension SinglyLinkedList : LinkedCollection {
-    public typealias Index = SinglyLinkedListIndex<Element>
-    public typealias Node = SinglyLinkedListNode<Element>
+extension SingleLinkedList : LinkedCollection {
+    public typealias Index = SingleLinkedListIndex<Element>
+    public typealias Node = SingleLinkedListNode<Element>
 
     public var startIndex: Index {
         return Index(owner: unsafe, tag: 0, previous: unsafe.head)
@@ -181,7 +181,7 @@ extension SinglyLinkedList : LinkedCollection {
 
 // MARK: - MutableCollection
 
-extension SinglyLinkedList : MutableCollection {
+extension SingleLinkedList : MutableCollection {
     public subscript(position: Index) -> Element {
         get {
             checkValidIndex(position)
@@ -222,7 +222,7 @@ extension SinglyLinkedList : MutableCollection {
 
 // MARK: - RangeReplaceableCollection
 
-extension SinglyLinkedList : RangeReplaceableCollection {
+extension SingleLinkedList : RangeReplaceableCollection {
     public mutating func append(_ newElement: Element) {
         ensureUnique()
         unsafe.attach(node: UnsafeForwardNode.make(newElement))

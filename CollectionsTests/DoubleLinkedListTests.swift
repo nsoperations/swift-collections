@@ -9,7 +9,7 @@
 import XCTest
 @testable import Collections
 
-class DoublyLinkedListTests: XCTestCase {
+class DoubleLinkedListTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
